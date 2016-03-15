@@ -22,7 +22,7 @@ for (var i=1; i<101; i++) {
 var board = "";
 var square = " ";
 var size = 8;
-function flipColor() {
+var flipColor = function() {
 	if (square === "\u25A0") {
 		square = " ";
 	} else {

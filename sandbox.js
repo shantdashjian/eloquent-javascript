@@ -49,3 +49,126 @@ switch (prompt("What's the weather like today?")) {
 		console.log("That's unusual.");
 		break;
 }
+
+// Defining a function
+var square = function(x) {
+	return x * x;
+};
+
+// Examples
+var makeNoise = function() {
+	console.log("Pling!");
+};
+
+var power = function(base, exponent) {
+	var result = 1;
+	for( var i = 0; i < exponent; i++) {
+		result = result * base;
+	};
+	return result;
+};
+
+// Scope
+var x = "outside";
+var f1 = function() {
+	var x = "inside f1";
+};
+f1();
+console.log(x);
+var f2 = function() {
+	x = "inside f2";
+};
+f2();
+console.log(x);
+
+// Nested scopes
+var landscape = function() {
+	var result = "";
+	var flat = function(size) {
+		for (var i = 0; i < size; i++)
+			result = result + "_";
+	};
+	var mountain = function(size) {
+		result = result + "/";
+		for (var i = 0; i < size; i++)
+			result = result + "'";
+		result = result + "\\";
+	};
+	flat(3);
+	mountain(4);
+	flat(6);
+	mountain(2);
+	return result;
+};
+
+// Blocks don't make the variable local, unless it's a function
+var x = 1;
+{
+	var x = 2;
+};
+console.log(x);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
