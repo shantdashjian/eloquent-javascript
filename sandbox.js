@@ -108,6 +108,75 @@ var x = 1;
 };
 console.log(x);
 
+// Functions as values
+var launchMissiles = function(value) {
+	console.log("Launch! " + value);
+};
+
+// Function declaration is subtly different than function definition
+what();
+function what(){
+	console.log("What!");
+};
+
+where();
+var where = function(){
+	console.log("where!");
+};
+
+// How to 'blow the stack'
+function chicken() { return egg(); }
+function egg() { return chicken(); }
+console.log(chicken() + " came first.");
+
+// Power function version with optional parameters handled
+var power = function(base, exponent) {
+	if (exponent === undefined)
+		exponent = 2;
+	var result = 1;
+	for( var i = 0; i < exponent; i++) {
+		result = result * base;
+	};
+	return result;
+};
+
+
+
+ 
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
