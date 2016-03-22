@@ -139,6 +139,267 @@ var power = function(base, exponent) {
 	};
 	return result;
 };
+// Closure
+function wrapValue(n) {
+	var localVariable = n;
+	return function() {return localVariable;};
+}
+
+// Multiplying by closure
+function multiplier(factor) {
+	return function(number) {
+		return number * factor;
+	};
+}
+
+// Exponentiation by closure
+function expo(power) {
+	return function(number) {
+		result = 1;
+		for(var i = 0; i < power; i++) 
+			result = result * number;
+		return result;
+	};
+}
+
+// Addition by closure
+function add(b) {
+	return function(a) {
+		return a + b;
+	};
+}
+
+// Subtraction by closure
+function subtract(subtrahend) {
+	return function(minuend) {
+		return minuend - subtrahend;
+	};
+}
+
+// Factorial by Recursion
+function factorial(number) {
+	if (number > 0) {
+		return number * factorial(number - 1);
+	} else {
+		return 1;		
+	};
+}
+
+// Power by Recursion
+function power(base, exponent) {
+	if (exponent > 0) {
+		return base * power(base, exponent - 1);
+	} else {
+		return 1;		
+	};
+}
+
+// Quiz: Given a number, find a sequence that starts with 1 and then 
+//	either adds 5 or multiplies by 3 to produce that number
+function solve(goal) {
+	function puzzle(start, sequence, goal) {
+		if (start === goal) {
+			return sequence;
+		} else if (start > goal) {
+			return null;
+		} else {
+			return	puzzle(start + 5, "(" + sequence + " + 5)", goal) ||
+							puzzle(start * 3, "(" + sequence + " * 3)", goal);
+							
+		};
+	}
+	return puzzle(1, "1", goal);
+}
+
+// Cows and Chickens
+cowsAndChickens(3,5);
+
+function cowsAndChickens(cows, chickens) {
+	console.log(leftPad(cows, 3) + " Cows");
+	console.log(leftPad(chickens, 3) + " Chickens");
+}
+
+function leftPad(number, width) {
+	var string = String(number);
+	while (string.length < width)
+		string = "0" + string;
+	return string;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
