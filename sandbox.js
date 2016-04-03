@@ -226,6 +226,164 @@ function leftPad(number, width) {
 	return string;
 }
 
+// Weresquirrel Log
+var day1 = {
+	squirrel: false,
+	events: ["work", "touched tree", "pizza", "running",
+					"television"]
+};
+
+var journal = [
+	{
+	squirrel: false,
+	events: ["work", "touched tree", "pizza", "running",
+					"television"]
+	},
+	{
+	squirrel: true,
+	events: ["watched movie", "touched tree", "eggs", "walking",
+					"Internet"]
+	},
+	{
+	squirrel: false,
+	events: ["home", "touched tree", "pizza", "running",
+					"television"]
+	}
+];
+
+var journal = [];
+
+function addEntry(squirrel) {
+	var entry = (events:[],squirrel: squirrel);
+	for (var i = 1; i< arguments.length; i++) 
+		entry.events.push(arguments[i]);
+	journal.push(entry);
+}
+
+function phi(table) {
+	return (table[3] * table[0] - table[2] * table[1] ) /
+		Math.sqrt((table[3]+table[2]) * 
+							(table[1]+table[0]) *
+							(table[3]+table[1]) *
+							(table[2]+table[0]));
+}
+
+function hasEvent(event, entry) {
+	return entry.events.indexOf(event) != -1;
+}
+
+function tableOf(event, journal) {
+	table = [0,0,0,0];
+	for(var i=0; i<journal.length; i++) {
+		if (!journal[i].squirrel && !hasEvent(event, journal[i]))
+			table[0]++;
+		if (!journal[i].squirrel && hasEvent(event, journal[i]))
+			table[1]++;
+		if (journal[i].squirrel && !hasEvent(event, journal[i]))
+			table[2]++;
+		if (journal[i].squirrel && hasEvent(event, journal[i]))
+			table[3]++;	
+	}
+	return table;
+}
+
+// Objects as Maps
+var map = {};
+function storePhi(event, phi) {
+	map[event] = phi;
+}
+
+// Extract all events
+function gatherCorrelations(journal) {
+	allEvents = [];
+	for(var i=0; i<journal.length; i++){
+		for(var j=0; j<journal[i].events.length; j++) {
+			if (!(journal[i].events[j] in allEvents))
+				allEvents.push(journal[i].events[j]);
+		}
+	}
+	phis = {};
+	for(var i=0; i<allEvents.length; i++)
+		phis[allEvents[i]] = phi(tableOf(allEvents[i], journal));
+	return phis;
+}
+
+// Event with highest correlation
+function highestCorrelation(correlations) {
+	var highestCorrelationEvent = "";
+	var highestCorrelation = -Infinity;
+	for (var event in correlations) {
+		if (correlations[event] > highestCorrelation) {
+			highestCorrelationEvent = event;
+			highestCorrelation = correlations[event]	
+		}
+	}
+	return highestCorrelationEvent;
+}
+
+// together
+for (var i=0; i<JOURNAL.length; i++) {
+	var entry = JOURNAL[i];
+	if (hasEvent("peanuts", entry) && !hasEvent("brushed teeth", entry))
+		entry.events.push("peanut teeth");
+}
+
+// Unshift and shift
+var todoList = [];
+function rememberTo(task) {
+	todoList.push(task);
+}
+function whatIsNext() {
+	return todoList.shift();
+}
+function urgentlyRememberTo(task) {
+	todoList.unshift(task);
+}
+
+// Remove element from array
+function remove(array, index) {
+	return array.slice(0,index).concat(array.slice(index+1));
+}
+
+// Arguments
+function bringIt() {
+	console.log("You sent me " + arguments.length + " arguments and here they are: ");
+	return arguments;
+}
+
+// 10 random numbers
+for (var i =0; i < 10; i++) {
+	console.log(Math.random());
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
