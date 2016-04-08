@@ -103,6 +103,32 @@ function nth(list, index) {
 	}
 }
 
+// Deep Comparison
+function deepEqual(value1, value2) {
+	if (typeof value1 != "object" && typeof value2 != "object") {
+		// if neither are objects
+		if (value1 === value2) {
+			return true;
+		} else {
+			return false;
+		}
+	} else if(value1 != null && value2 != null) {
+		// if both are objects and neither are null
+		for (var property in value1) {
+			if (!(property in value2))
+				return false;
+			if (!(deepEqual(value1[property], value2[property]) ) )
+				return false;
+		}
+		return true;
+	} else if(value1 == null && value2 == null) {
+		// if both are null
+		return true;
+	} else {
+		// if one is null
+		return false;
+	}
+}
 
 
 
