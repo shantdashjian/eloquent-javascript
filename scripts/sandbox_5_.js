@@ -91,6 +91,181 @@ function findYounger(youngest,current) {
 		return youngest;
 }
 
+function mostAncient(persons) {
+	var earliestPerson = persons[0];
+	persons.forEach(function(person) {
+		if (person.born < earliestPerson.born)
+			earliestPerson = person;	
+	});
+	return earliestPerson;
+}
+
+function average(array) {
+	function plus(a,b) { return a+b;}
+	return array.reduce(plus) / array.length;
+}
+
+function age(person) {
+	return person.died - person.born;
+}
+
+function ages(persons) {
+	return persons.map(age);
+}
+
+function men(persons) {
+	return persons.filter(man);
+}
+
+function women(persons) {
+	return persons.filter(woman);
+}
+
+function man(person) {
+	return person.sex == "m";
+}
+
+function woman(person) {
+	return person.sex == "f";
+}
+
+function averageAgeMen(persons) {
+	return average(ages(men(persons)));
+}
+
+function averageAgeWomen(persons) {
+	return average(ages(women(persons)));
+}
+
+function directAncestorIsMostAncient(person) {
+	console.log(person.name);
+	var father = ancestry.filter(function(father) {
+									return father.name == person.father;
+							})[0];
+	if (father == mostAncient(ancestry))
+		return true;
+	else if (father == undefined)
+		return false;
+	else {
+		return directAncestorIsMostAncient(father);
+	}
+}
+
+var byName = {};
+ancestry.forEach(function(person) { byName[person.name] = person; });
+
+function reduceAncestors(person, f, defaultValue) {
+	function valueFor(person) {
+		if (person == null)
+			return defaultValue;
+		else
+			return f(person, valueFor(byName[person.mother]),
+											valueFor(byName[person.father]));
+	}
+	return valueFor(person);
+}
+
+function sharedDNA(person, fromMother, fromFather) {
+	if	(person.name == "Pauwels van Haverbeke")
+		 return 1;
+	else 
+		return (fromMother + fromFather) / 2;
+}
+
+// var ph = byName["Philibert Haverbeke"];
+// console.log((reduceAncestors(ph, sharedDNA, 0) / 4 * 100).toFixed(2) + "%");
+
+// Find the DNA percentage of known ancestors for a given person, who lived past 70
+function ancestorsWhoLivedPast70() {
+	return ancestry.filter(function(person) { 
+		return person.died - person.born >= 70;
+	});
+}
+
+function sharedDNAwithAncestor(person, ancestor, fromMother, fromFather) {
+	if	(person.name == ancestor.name)
+		 return 1;
+	else 
+		return (fromMother + fromFather) / 2;	
+}
+
+function reduceAncestorsWith(person, ancestor, f, defaultValue) {
+	function valueFor(person) {
+		if (person == null)
+			return defaultValue;
+		else
+			return f(person, ancestor, valueFor(byName[person.mother]),
+											valueFor(byName[person.father]));
+	}
+	return valueFor(person);
+}
+/*
+var allOver70 = ancestorsWhoLivedPast70();
+allOver70.forEach(function(ancestor) {
+console.log(known.name + " shares " + (reduceAncestorsWith(known,ancestor, sharedDNAwithAncestor, 0) / 4 * 100).toFixed(2) + "%" + " with " + ancestor.name);
+});
+*/
+
+// Find the percentage of known ancestors, for a given person, who lived past 70
+function countAncestors(person, test) {
+	function combine(person, fromMother, fromFather) {
+		var thisOneCounts = test(person);
+		return fromMother + fromFather + (thisOneCounts? 1 : 0);
+	}
+	return reduceAncestors(person, combine, 0);
+}
+
+function longLivingPercentage(person) {
+	var all = countAncestors(person, function(person) {
+		return true;
+	});
+	var longLiving = countAncestors(person, function(person) {
+		return person.died - person.born >= 70;
+	});
+	return longLiving / all;
+}
+
+/*
+function isInSet(person, set) {
+	var flag = false;
+	set.forEach(function(item) {
+		if (person == item)
+			flag = true;
+	});
+	return flag;
+}
+*/
+function isInSet(set, person) {
+	return set.indexOf(person.name) > -1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
