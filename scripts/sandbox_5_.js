@@ -239,6 +239,172 @@ function isInSet(set, person) {
 	return set.indexOf(person.name) > -1;
 }
 
+// Chapter 6: The Secret Life of Objects
+var rabbit = {};
+rabbit.speak = function(line) {
+	console.log("The rabbit says '" + line + "'"); 
+}
+
+function speak(line) {
+	console.log("The " + this.type + " rabbit says '" + line + "'"); 
+}
+
+var whiteRabbit = {
+	type: "white",
+	speak: speak
+};
+
+var dog = {};
+dog.bark = function(phrase) {
+	console.log("The dog barks '" + phrase + "'");
+}
+
+function bark(phrase) {
+	console.log("The " + this.type + " barks '" + phrase + "'");
+}
+
+var jimmie = {type: "bulldog", bark: bark};
+
+var protoRabbit = {
+	speak: function(line) {
+		console.log("The " + this.type + " rabbit says '" + line + "'");
+	}
+};
+
+var killerRabbit = Object.create(protoRabbit);
+killerRabbit.type = "killer";
+
+function Rabbit(type) {
+	this.type = type;
+}
+
+Rabbit.prototype.speak = function(line) {
+		console.log("The " + this.type + " rabbit says '" + line + "'");
+}
+
+Rabbit.prototype.dance = function() {
+		console.log("The " + this.type + " rabbit can Lindy Hop");
+}
+
+// Prototype interference
+/*
+
+var map = {};
+function storePhi(event, phi) {
+	map[event] = phi;
+}
+
+storePhi("pizza", 0.5);
+storePhi("touched tree", 0.2);
+
+for (var name in map) {
+	if (map.hasOwnProperty(name)) {
+		console.log(name);
+	}
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
